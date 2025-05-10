@@ -17,11 +17,33 @@ datasource db {
 // Example data model
 
 model User {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+}
+
+model Resume {
+  id          String  @id @default(cuid())
+  userId      String
+  title       String?
+  description String?
+
+  photoUrl     String?
+  colorHex     String  @default("#000000")
+  borderRadius String  @default("squircle")
+  summary      String?
+  firstName    String?
+  lastName     String?
+  jobTitle     String?
+  city         String?
+  zipCode      String?
+  country      String?
+  phone        String?
+  email        String?
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  email String @unique
-
-  name String?
+  @@map("resumes")
 }

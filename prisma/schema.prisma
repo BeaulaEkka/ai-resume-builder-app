@@ -28,4 +28,22 @@ model Resume {
   userId      String
   title       String?
   description String?
+
+  photoUrl     String?
+  colorHex     String  @default("#000000")
+  borderRadius String  @default("squircle")
+  summary      String?
+  firstName    String?
+  lastName     String?
+  jobTitle     String?
+  city         String?
+  zipCode      String?
+  country      String?
+  phone        String?
+  email        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("resumes")
 }
