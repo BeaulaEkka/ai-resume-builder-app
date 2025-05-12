@@ -31,7 +31,13 @@ export default function Navbar() {
                 Dashboard
               </Button>
             </Link>
-            <UserButton />
+            <UserButton appearance={
+              { elements: { appearance: { elements: {
+                userButton: { width: "40px", height: "40px" },
+                userProfileCard: { width: "300px", height: "400px" },
+                userProfileHeader: { width: "300px", height: "200px" },
+              }} } }
+            } />
           </SignedIn>
 
           <SignedOut>
