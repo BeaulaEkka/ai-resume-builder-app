@@ -42,7 +42,7 @@ export default function Navbar() {
 
           <SignedOut>
             <SignInButton>
-              <Button variant="outline" className="border-white text-white">
+              <Button variant="outline" className="border-white text-black">
                 Sign In
               </Button>
             </SignInButton>
