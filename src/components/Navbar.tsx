@@ -12,9 +12,11 @@ import Image from "next/image";
 import logo from "@/assets/logo.png";
 import { CreditCard } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
-import {} from "@clerk/themes";
+import { dark } from "@clerk/themes";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
+  const { theme } = useTheme();
   return (
     <nav className="flex flex-wrap items-center justify-between bg-gray-800 p-6">
       {/* Logo section */}
@@ -38,6 +40,7 @@ export default function Navbar() {
             </Link>
             <UserButton
               appearance={{
+                baseTheme: theme === "dark" ? dark : undefined,
                 elements: {
                   avatarBox: {
                     width: 35,
