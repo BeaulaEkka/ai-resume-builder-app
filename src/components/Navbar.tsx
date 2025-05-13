@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import { CreditCard } from "lucide-react";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Navbar() {
   return (
@@ -27,6 +28,7 @@ export default function Navbar() {
 
         {/* Navigation + Auth section */}
         <div className="flex items-center space-x-4">
+          <ModeToggle />
           <SignedIn>
             <Link href="/resumes">
               <Button variant="ghost" className="text-white hover:bg-gray-700">
