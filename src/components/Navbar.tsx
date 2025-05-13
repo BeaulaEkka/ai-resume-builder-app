@@ -12,6 +12,7 @@ import Image from "next/image";
 import logo from "@/assets/logo.png";
 import { CreditCard } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
+import {} from "@clerk/themes";
 
 export default function Navbar() {
   return (
