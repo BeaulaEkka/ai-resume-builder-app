@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className="flex flex-wrap items-center justify-between bg-gray-800 p-6">
       {/* Logo section */}
-      <div className="mx-auto flex w-[85%] justify-between">
+      <div className="mx-auto flex h-6 w-[85%] justify-between">
         <div className="mr-6 flex items-center space-x-2 text-white">
           <Image src={logo} alt="Logo" width={60} height={60} />
 
@@ -31,13 +31,16 @@ export default function Navbar() {
                 Dashboard
               </Button>
             </Link>
-            <UserButton appearance={
-              { elements: { appearance: { elements: {
-                userButton: { width: "40px", height: "40px" },
-                userProfileCard: { width: "300px", height: "400px" },
-                userProfileHeader: { width: "300px", height: "200px" },
-              }} } }
-            } />
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: {
+                    width: 45,
+                    height: 45,
+                  },
+                },
+              }}
+            />
           </SignedIn>
 
           <SignedOut>
