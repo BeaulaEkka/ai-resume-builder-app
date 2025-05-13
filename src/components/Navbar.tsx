@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -9,6 +10,7 @@ import {
 } from "@clerk/nextjs";
 import Image from "next/image";
 import logo from "@/assets/logo.png";
+import { CreditCard } from "lucide-react";
 
 export default function Navbar() {
   return (
@@ -35,12 +37,20 @@ export default function Navbar() {
               appearance={{
                 elements: {
                   avatarBox: {
-                    width: 45,
-                    height: 45,
+                    width: 35,
+                    height: 35,
                   },
                 },
               }}
-            />
+            >
+              <UserButton.MenuItems>
+                <UserButton.Link
+                  label="Billing"
+                  labelIcon={<CreditCard className="size-4" />}
+                  href="/billing"
+                />
+              </UserButton.MenuItems>
+            </UserButton>
           </SignedIn>
 
           <SignedOut>
