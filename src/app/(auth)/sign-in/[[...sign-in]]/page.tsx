@@ -1,13 +1,9 @@
 import { SignIn } from "@clerk/nextjs";
 
-export interface PageProps {
-  prop: string;
-}
-
-export default function Page({  }: PageProps) {
+export default function SignInPage() {
   return (
-    <main className="flex h-screen items-center justify-center p-3">
+    <div className="flex h-screen items-center justify-center p-3">
       <SignIn />
-    </main>
+    </div>
   );
 }
