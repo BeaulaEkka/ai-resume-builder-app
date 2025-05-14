@@ -4,11 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { GeneralInfoForm } from "./forms/GeneralInfoForm";
 
-export type ResumeEditorProps = {
-  prop: string;
-};
-
-export default function ResumeEditor({ prop }: ResumeEditorProps) {
+export default function ResumeEditor() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="space-y-1 border-b px-3 py-5 text-center">
@@ -20,8 +16,8 @@ export default function ResumeEditor({ prop }: ResumeEditorProps) {
       </header>
       <main className="relative grow">
         <div className="absolute top-0 bottom-0 flex w-full">
-          <div className="w-full md:w-1/2 p-3">
-            <GeneralInfoForm prop={prop} />
+          <div className="w-full p-3 md:w-1/2">
+            <GeneralInfoForm />
           </div>
           <div className="grow md:border" />
           <div className="hidden w-1/2 md:flex">right</div>
