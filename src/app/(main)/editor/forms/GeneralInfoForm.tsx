@@ -13,11 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-export interface GeneralInfoFormProps {
-  prop: string;
-}
-
-export function GeneralInfoForm({ prop }: GeneralInfoFormProps) {
+export function GeneralInfoForm() {
   const form = useForm<GeneralInfoValues>({
     resolver: zodResolver(generalInfoFormSchema),
     defaultValues: {
