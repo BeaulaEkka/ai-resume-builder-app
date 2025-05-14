@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { GeneralInfoForm } from "./forms/GeneralInfoForm";
 
 export type ResumeEditorProps = {
   prop: string;
@@ -19,7 +20,9 @@ export default function ResumeEditor({ prop }: ResumeEditorProps) {
       </header>
       <main className="relative grow">
         <div className="absolute top-0 bottom-0 flex w-full">
-          <div className="w-full md:w-1/2">left</div>
+          <div className="w-full md:w-1/2 p-3">
+            <GeneralInfoForm prop={prop} />
+          </div>
           <div className="grow md:border" />
           <div className="hidden w-1/2 md:flex">right</div>
         </div>
