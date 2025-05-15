@@ -9,8 +9,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { personalInfoSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import debounce from "lodash.debounce";
 
 export default function PersonalInfoForm() {
   const form = useForm({
@@ -27,6 +28,32 @@ export default function PersonalInfoForm() {
       phone: "",
     },
   });
+  //because we dont have a submit button in this form, we need to trigger validation manually because we need to pass the values to the resumepreview immediately
+  // useEffect(() => {
+  //   const { unsubscribe } = form.watch(async () => {
+  //     const isValid = await form.trigger();
+  //     if (!isValid) return;
+  //     //update the resume preview
+  //   });
+  //   return unsubscribe;
+  // }, [form]);
+  useEffect(() => {
+    const debouncedValidateAndUpdate = debounce(async () => {
+      const isValid = await form.trigger();
+      if (!isValid) return;
+      // update the resume preview
+    }, 500); // wait 500ms after the user stops typing
+
+    const subscription = form.watch(() => {
+      debouncedValidateAndUpdate();
+    });
+
+    return () => {
+      subscription.unsubscribe(); // cleanup
+      debouncedValidateAndUpdate.cancel(); // cancel any pending calls
+    };
+  }, [form]);
+
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1.5 text-center">
@@ -37,6 +64,7 @@ export default function PersonalInfoForm() {
       </div>
       <Form {...form}>
         <form className="space-y-3">
+          {/* photo */}
           <FormField
             control={form.control}
             name="photo"
@@ -61,7 +89,7 @@ export default function PersonalInfoForm() {
               </FormItem>
             )}
           />
-
+          {/* first name */}
           <FormField
             control={form.control}
             name="firstName"
@@ -75,7 +103,7 @@ export default function PersonalInfoForm() {
               </FormItem>
             )}
           />
-
+          {/* last name */}
           <FormField
             control={form.control}
             name="lastName"
@@ -93,7 +121,7 @@ export default function PersonalInfoForm() {
               </FormItem>
             )}
           />
-
+          {/* job title */}
           <FormField
             control={form.control}
             name="jobTitle"
@@ -107,7 +135,7 @@ export default function PersonalInfoForm() {
               </FormItem>
             )}
           />
-
+          {/* city */}
           <FormField
             control={form.control}
             name="city"
@@ -121,7 +149,7 @@ export default function PersonalInfoForm() {
               </FormItem>
             )}
           />
-
+          {/* zip code */}
           <FormField
             control={form.control}
             name="zipCode"
