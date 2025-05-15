@@ -2,10 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { GeneralInfoForm } from "./forms/GeneralInfoForm";
-import PersonalInfoForm from "./forms/PersonalInfoForm";
+import { BreadCrumbs } from "./BreadCrumbs";
+import { useSearchParams } from "next/navigation";
+import { steps } from "./steps";
 
 export default function ResumeEditor() {
+  const searchParams = useSearchParams();
+
+  const currentStep = searchParams.get("step") || steps[0].key;
+
+  const setStep = (key: string) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("step", key);
+    window.history.pushState(null, "", `?${newSearchParams}`); //this can also be achieved with router.push(`/editor?${newSearchParams}`); but there is a delay
+  };
+
+  const FormComponent = steps.find(
+    (step) => step.key === currentStep,
+  )?.component;
   return (
     <div className="flex min-h-screen flex-col">
       <header className="space-y-1 border-b px-3 py-5 text-center">
@@ -17,9 +31,9 @@ export default function ResumeEditor() {
       </header>
       <main className="relative grow">
         <div className="absolute top-0 bottom-0 flex w-full">
-          <div className="w-full p-3 md:w-1/2 overflow-y-auto">
-            <GeneralInfoForm />
-            <PersonalInfoForm />
+          <div className="w-full overflow-y-auto p-3 md:w-1/2">
+            <BreadCrumbs currentStep={currentStep} setCurrentStep={setStep} />
+            {FormComponent && <FormComponent />}
           </div>
           <div className="grow md:border" />
           <div className="hidden w-1/2 md:flex">right</div>
