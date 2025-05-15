@@ -16,6 +16,7 @@ export default function PersonalInfoForm() {
   const form = useForm({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
+      photo: undefined,
       firstName: "",
       lastName: "",
       jobTitle: "",
@@ -36,6 +37,31 @@ export default function PersonalInfoForm() {
       </div>
       <Form {...form}>
         <form className="space-y-3">
+          <FormField
+            control={form.control}
+            name="photo"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Photo</FormLabel>
+                <FormControl>
+                  <Input
+                    name={field.name}
+                    ref={field.ref}
+                    onBlur={field.onBlur}
+                    disabled={field.disabled}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      field.onChange(file);
+                    }}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="firstName"
@@ -98,7 +124,7 @@ export default function PersonalInfoForm() {
 
           <FormField
             control={form.control}
-            name="city"
+            name="zipCode"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Zip Code</FormLabel>
@@ -110,7 +136,48 @@ export default function PersonalInfoForm() {
             )}
           />
 
-          {/* Add more fields as needed */}
+          {/* country */}
+          <FormField
+            control={form.control}
+            name="country"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Country</FormLabel>
+                <FormControl>
+                  <Input placeholder="USA" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="john@doe.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* phone */}
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone</FormLabel>
+                <FormControl>
+                  <Input placeholder="+1 123 456 7890" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </form>
       </Form>
       personalInfoForm
