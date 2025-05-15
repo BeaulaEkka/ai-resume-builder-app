@@ -4,7 +4,7 @@ import ResumeEditor from "./ResumeEditor";
 export default function page() {
   return (
     <div>
-      <ResumeEditor prop="prop" />
+      <ResumeEditor  />
     </div>
   );
 }
