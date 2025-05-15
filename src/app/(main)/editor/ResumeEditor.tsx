@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { BreadCrumbs } from "./BreadCrumbs";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./steps";
+import Footer from "./Footer";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
+  
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -39,20 +39,7 @@ export default function ResumeEditor() {
           <div className="hidden w-1/2 md:flex">right</div>
         </div>
       </main>
-      <footer className="w-full border-t px-3 py-5">
-        <div className="mx-w-7xl mx-auto flex flex-wrap justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <Button variant="secondary">Previous Step</Button>
-            <Button>Next Step</Button>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button asChild variant="secondary">
-              <Link href="/resumes">Close</Link>
-            </Button>
-            <p className="text-muted-foreground opacity-0">Saving...</p>
-          </div>
-        </div>
-      </footer>
+      <Footer currentStep={currentStep} setCurrentStep={setStep} />
     </div>
   );
 }
