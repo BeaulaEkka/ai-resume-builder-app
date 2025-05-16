@@ -7,28 +7,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ResumeValues, workExperienceSchema } from "@/lib/validations";
+import { EditorFormProps } from "@/lib/types";
+import { workExperienceSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
+import debounce from "lodash.debounce";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-
-export interface WorkExperienceFormProps {
-  resumeData: ResumeValues;
-  setResumeData: (data: ResumeValues) => void;
-}
 
 export default function WorkExperienceForm({
   resumeData,
   setResumeData,
-}: WorkExperienceFormProps) {
+}: EditorFormProps) {
   const form = useForm({
     resolver: zodResolver(workExperienceSchema),
     defaultValues: {
-      postion: resumeData.position || "",
-      company: resumeData.company || "",
-      startDate: resumeData.startDate || "",
-      endDate: resumeData.endDate || "",
-      description: resumeData.description || "",
+      workExperiences: resumeData.workExperiences || [],
     },
   });
 
@@ -37,7 +30,12 @@ export default function WorkExperienceForm({
       const isValid = await form.trigger();
       if (!isValid) return;
       // update the resume preview
-      setResumeData({ ...resumeData, ...values });
+      setResumeData({
+        ...resumeData,
+        workExperiences: values.workExperiences?.filter(
+          (exp) => exp !== undefined,
+        ),
+      });
     }, 500); // wait 500ms after the user stops typing
 
     const subscription = form.watch((values) => {
