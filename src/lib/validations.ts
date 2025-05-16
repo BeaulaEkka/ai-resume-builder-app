@@ -68,5 +68,4 @@ export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
 };
 
 //in a new resume id needs to be optional /but in edit resume it needs to be required
-
 //when we upload a photo to backend it becomes a url and thats why needs to be a string
