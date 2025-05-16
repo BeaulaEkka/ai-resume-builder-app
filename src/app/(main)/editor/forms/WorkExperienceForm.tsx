@@ -32,9 +32,8 @@ export default function WorkExperienceForm({
       // update the resume preview
       setResumeData({
         ...resumeData,
-        workExperiences: values.workExperiences?.filter(
-          (exp) => exp !== undefined,
-        ),
+        workExperiences:
+          values.workExperiences?.filter((exp) => exp !== undefined) || [],
       });
     }, 500); // wait 500ms after the user stops typing
 
@@ -47,6 +46,7 @@ export default function WorkExperienceForm({
       debouncedValidateAndUpdate.cancel(); // cancel any pending calls
     };
   }, [form, resumeData, setResumeData]);
+
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1.5 text-center">
