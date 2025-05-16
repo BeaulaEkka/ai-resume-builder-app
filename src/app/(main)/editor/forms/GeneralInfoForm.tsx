@@ -12,15 +12,40 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { EditorFormProps } from "@/lib/types";
+import { useEffect } from "react";
+import debounce from "lodash.debounce";
 
-export function GeneralInfoForm() {
+export function GeneralInfoForm({
+  resumeData,
+  setResumeData,
+}: EditorFormProps) {
   const form = useForm<GeneralInfoValues>({
     resolver: zodResolver(generalInfoFormSchema),
     defaultValues: {
-      title: "",
-      description: "",
+      title: resumeData.title || "",
+      description: resumeData.description || "",
     },
   });
+
+  useEffect(() => {
+    const debouncedValidateAndUpdate = debounce(async (values) => {
+      const isValid = await form.trigger();
+      if (!isValid) return;
+      // update the resume preview
+      setResumeData({ ...resumeData, ...values });
+    }, 500); // wait 500ms after the user stops typing
+
+    const subscription = form.watch((values) => {
+      debouncedValidateAndUpdate(values);
+    });
+
+    return () => {
+      subscription.unsubscribe(); // cleanup
+      debouncedValidateAndUpdate.cancel(); // cancel any pending calls
+    };
+  }, [form, resumeData, setResumeData]);
+
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1 text-center">

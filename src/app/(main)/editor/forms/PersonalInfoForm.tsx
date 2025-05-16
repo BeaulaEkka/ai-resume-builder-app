@@ -12,47 +12,43 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
-
-export default function PersonalInfoForm() {
+import { EditorFormProps } from "@/lib/types";
+export default function PersonalInfoForm({
+  resumeData,
+  setResumeData,
+}: EditorFormProps) {
   const form = useForm({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
-      photo: undefined,
-      firstName: "",
-      lastName: "",
-      jobTitle: "",
-      city: "",
-      zipCode: "",
-      country: "",
-      email: "",
-      phone: "",
+      firstName: resumeData.firstName || "",
+      lastName: resumeData.lastName || "",
+      jobTitle: resumeData.jobTitle || "",
+      city: resumeData.city || "",
+      zipCode: resumeData.zipCode || "",
+      country: resumeData.country || "",
+      email: resumeData.email || "",
+      phone: resumeData.phone || "",
     },
   });
   //because we dont have a submit button in this form, we need to trigger validation manually because we need to pass the values to the resumepreview immediately
-  // useEffect(() => {
-  //   const { unsubscribe } = form.watch(async () => {
-  //     const isValid = await form.trigger();
-  //     if (!isValid) return;
-  //     //update the resume preview
-  //   });
-  //   return unsubscribe;
-  // }, [form]);
+
   useEffect(() => {
-    const debouncedValidateAndUpdate = debounce(async () => {
+    const debouncedValidateAndUpdate = debounce(async (values) => {
       const isValid = await form.trigger();
       if (!isValid) return;
       // update the resume preview
+      setResumeData({ ...resumeData, ...values });
     }, 500); // wait 500ms after the user stops typing
 
-    const subscription = form.watch(() => {
-      debouncedValidateAndUpdate();
+    const subscription = form.watch((values) => {
+      debouncedValidateAndUpdate(values);
     });
 
     return () => {
       subscription.unsubscribe(); // cleanup
       debouncedValidateAndUpdate.cancel(); // cancel any pending calls
     };
-  }, [form]);
+  }, [form, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">

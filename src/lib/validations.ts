@@ -37,3 +37,36 @@ export const personalInfoSchema = z.object({
 });
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
+
+//workExperienceForm
+export const workExperienceSchema = z.object({
+  workExperiences: z.array(
+    z
+      .object({
+        company: optionalString,
+        position: optionalString,
+        startDate: optionalString, //date inputfield contains string will be later converted to datein the server
+        endDate: optionalString,
+        description: optionalString,
+      })
+      .optional()
+  ),
+});
+export type WorkExperienceValues = z.infer<typeof workExperienceSchema>;
+
+//resumeSchema its a combination of all the schemas flattened with shape
+export const resumeSchema = z.object({
+  ...generalInfoFormSchema.shape,
+  ...personalInfoSchema.shape,
+  ...workExperienceSchema.shape,
+});
+
+//but it clashes with the photo in the personalInfoSchema so we need to omit it
+export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
+  id?: string;
+  photo?: File | string | null; //null because if deleted we send null
+};
+
+//in a new resume id needs to be optional /but in edit resume it needs to be required
+
+//when we upload a photo to backend it becomes a url and thats why needs to be a string

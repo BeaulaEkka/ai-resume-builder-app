@@ -1,13 +1,15 @@
 "use client";
-
 import { BreadCrumbs } from "./BreadCrumbs";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./steps";
 import Footer from "./Footer";
+import { useState } from "react";
+import { ResumeValues } from "@/lib/validations";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
-  
+
+  const [resumeData, setResumeData] = useState<ResumeValues>({});
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -33,10 +35,18 @@ export default function ResumeEditor() {
         <div className="absolute top-0 bottom-0 flex w-full">
           <div className="w-full overflow-y-auto p-3 md:w-1/2">
             <BreadCrumbs currentStep={currentStep} setCurrentStep={setStep} />
-            {FormComponent && <FormComponent />}
+            {FormComponent && (
+              <FormComponent
+                resumeData={resumeData}
+                setResumeData={setResumeData}
+              />
+            )}
           </div>
           <div className="grow md:border" />
-          <div className="hidden w-1/2 md:flex">right</div>
+          <div className="hidden w-1/2 md:flex">
+            right
+            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
+          </div>
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
