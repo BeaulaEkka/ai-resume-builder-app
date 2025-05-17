@@ -2,15 +2,18 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { workExperienceSchema, WorkExperienceValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import debounce from "lodash.debounce";
 import { GripHorizontal } from "lucide-react";
 import { useEffect } from "react";
@@ -111,6 +114,96 @@ function WorkExperienceFormField({
         <span className="font-semibold">Work Experience {index + 1}</span>
         <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
       </div>
+      {/**Position */}
+      <FormField
+        control={form.control}
+        name={`workExperiences.${index}.position`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Job Title</FormLabel>
+            <FormControl>
+              <Input placeholder="Software Engineer" {...field} autoFocus />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      {/**Company */}
+      <FormField
+        control={form.control}
+        name={`workExperiences.${index}.company`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Company</FormLabel>
+            <FormControl>
+              <Input placeholder="Company Name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <div className="grid grid-cols-2 gap-3">
+        {/**Start Date */}
+        <FormField
+          control={form.control}
+          name={`workExperiences.${index}.startDate`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Start Date</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Company Name"
+                  {...field}
+                  type="date"
+                  value={field.value?.slice(0, 10)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/**End Date */}
+        <FormField
+          control={form.control}
+          name={`workExperiences.${index}.endDate`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>End Date</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Company Name"
+                  {...field}
+                  type="date"
+                  value={field.value?.slice(0, 10)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+      <FormDescription>
+        Leave <span className="font-semibold">end date</span> empty if you are
+        currently working here.
+      </FormDescription>
+      {/**Description */}
+      <FormField
+        control={form.control}
+        name={`workExperiences.${index}.description`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Description</FormLabel>
+            <FormControl>
+              <Textarea placeholder="Description" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <Button variant="destructive" onClick={() => remove(index)}>
+        Remove
+      </Button>
     </div>
   );
 }
