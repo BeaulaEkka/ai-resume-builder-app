@@ -23,7 +23,7 @@ export default function WorkExperienceForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  const form = useForm({
+  const form = useForm<WorkExperienceValues>({
     resolver: zodResolver(workExperienceSchema),
     defaultValues: {
       workExperiences: resumeData.workExperiences || [],
@@ -67,7 +67,7 @@ export default function WorkExperienceForm({
         </p>
       </div>
       <Form {...form}>
-        <form action="" className="space-y-3">
+        <form  className="space-y-3">
           {fields.map((field, index) => (
             <WorkExperienceFormField
               key={field.id}
@@ -123,7 +123,7 @@ function WorkExperienceFormField({
 
   return (
     <div className="bg-background space-y-3 rounded-md border p-3">
-      <div className="gap- flex justify-between items-center ">
+      <div className="gap- flex items-center justify-between">
         <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
         <span className="text-md">{getExperienceLabel()}</span>
 

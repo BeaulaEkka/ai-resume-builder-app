@@ -56,14 +56,16 @@ export type WorkExperienceValues = z.infer<typeof workExperienceSchema>;
 
 //educationForm
 export const educationSchema = z.object({
-  educations: z.array(
-    z.object({
-      institution: optionalString,
-      degree: optionalString,
-      startDate: optionalString,
-      endDate: optionalString,
-    })
-  ),
+  educations: z
+    .array(
+      z.object({
+        institution: optionalString,
+        degree: optionalString,
+        startDate: optionalString,
+        endDate: optionalString,
+      })
+    )
+    .optional(),
 });
 
 export type EducationValues = z.infer<typeof educationSchema>;

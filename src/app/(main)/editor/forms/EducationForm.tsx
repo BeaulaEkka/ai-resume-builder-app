@@ -19,12 +19,13 @@ export default function EducationForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  const form = useForm({
+  const form = useForm<EducationValues>({
     resolver: zodResolver(educationSchema),
     defaultValues: {
       educations: resumeData.educations || [],
     },
   });
+
   useEffect(() => {
     const debouncedValidateAndUpdate = debounce(async (values) => {
       const isValid = await form.trigger();
@@ -32,10 +33,9 @@ export default function EducationForm({
       // update the resume preview
       setResumeData({
         ...resumeData,
-        workExperiences:
-          values.workExperiences?.filter((exp) => exp !== undefined) || [],
+        educations: values.educations?.filter((edu) => edu !== undefined) || [],
       });
-    }, 500); // wait 500ms after the user stops typing
+    }, 500);
 
     const subscription = form.watch((values) => {
       debouncedValidateAndUpdate(values);
@@ -79,7 +79,7 @@ export default function EducationForm({
                   degree: "",
                   startDate: "",
                   endDate: "",
-                  //   description: "",
+                  
                 })
               }
             >
