@@ -110,31 +110,42 @@ function WorkExperienceFormField({
 }: WorkExperienceFormFieldProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  function getExperienceLabel() {
+    const position = form.getValues(`workExperiences.${index}.position`);
+    const company = form.getValues(`workExperiences.${index}.company`);
+
+    if (position || company) {
+      return `${position || "Untitled Role"} at ${company || "Unknown Company"}`;
+    }
+
+    return `Work Experience ${index + 1}`;
+  }
+
   return (
     <div className="bg-background space-y-3 rounded-md border p-3">
-      <div className="gap- flex justify-between">
+      <div className="gap- flex justify-between items-center ">
         <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
-        <span className="font-semibold">Work Experience {index + 1}</span>
-        {/* <Button variant="destructive" onClick={() => remove(index)}>
-          Remove
-        </Button> */}
+        <span className="text-md">{getExperienceLabel()}</span>
+
         <div className="flex gap-2">
           <Button
             variant="ghost"
-            size="icon"
             type="button"
             onClick={() => setIsCollapsed((prev) => !prev)}
           >
             {isCollapsed ? (
-              <ChevronDown className="h-4 w-4" />
+              <ChevronDown size="5" strokeWidth="3px" />
             ) : (
-              <ChevronUp className="h-4 w-4" />
+              <ChevronUp size="5" strokeWidth="3px" />
             )}
           </Button>
-          <X
-            onClick={() => remove(index)}
-            className="text-destructive h-6 w-6 cursor-pointer"
-          />
+          <Button variant="ghost" type="button" onClick={() => remove(index)}>
+            <X
+              strokeWidth="3px"
+              size="5"
+              className="text-destructive h-6 w-6 cursor-pointer font-bold"
+            />
+          </Button>
         </div>
       </div>
       {/**Position */}
