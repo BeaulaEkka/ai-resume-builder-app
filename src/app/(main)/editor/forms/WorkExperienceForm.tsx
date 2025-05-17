@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,11 +9,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EditorFormProps } from "@/lib/types";
-import { workExperienceSchema } from "@/lib/validations";
+import { workExperienceSchema, WorkExperienceValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import debounce from "lodash.debounce";
+import { GripHorizontal } from "lucide-react";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 
 export default function WorkExperienceForm({
   resumeData,
@@ -47,36 +49,68 @@ export default function WorkExperienceForm({
     };
   }, [form, resumeData, setResumeData]);
 
+  //useField is used to create a controlled input field
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "workExperiences",
+  });
+
   return (
     <div className="mx-auto max-w-xl space-y-6">
-      <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold">Work Experience</h2>
+      <div className="spaye-y-1.5 text-center">
+        <h2 className="text-2xl font-bold">Work Experience</h2>
         <p className="text-muted-foreground text-sm">
-          Add your work experience. This will appear on your resume.
+          Tell us about your work experience. This will appear on your resume.
         </p>
       </div>
       <Form {...form}>
-        <form className="space-y-3">
-          <FormField
-            control={form.control}
-            name="workExperience"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Work Experience</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Software Engineer at XYZ Company"
-                    {...field}
-                    autoFocus
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* Add more fields as needed */}
+        <form action="" className="space-y-3">
+          {fields.map((field, index) => (
+            <WorkExperienceFormField
+              key={field.id}
+              index={index}
+              form={form}
+              remove={remove}
+            />
+          ))}
+          <div className="flex justify-center">
+            <Button
+              type="button"
+              onClick={() =>
+                append({
+                  position: "",
+                  company: "",
+                  startDate: "",
+                  endDate: "",
+                  description: "",
+                })
+              }
+            >
+              Add Work Experience
+            </Button>
+          </div>
         </form>
       </Form>
+    </div>
+  );
+}
+
+interface WorkExperienceFormFieldProps {
+  form: UseFormReturn<WorkExperienceValues>;
+  index: number;
+  remove: (index: number) => void;
+}
+function WorkExperienceFormField({
+  form,
+  index,
+  remove,
+}: WorkExperienceFormFieldProps) {
+  return (
+    <div className="bg-background space-y-3 rounded-md border p-3">
+      <div className="gap- flex justify-between">
+        <span className="font-semibold">Work Experience {index + 1}</span>
+        <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
+      </div>
     </div>
   );
 }
