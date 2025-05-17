@@ -67,7 +67,7 @@ export default function WorkExperienceForm({
         </p>
       </div>
       <Form {...form}>
-        <form  className="space-y-3">
+        <form className="space-y-3">
           {fields.map((field, index) => (
             <WorkExperienceFormField
               key={field.id}
@@ -189,7 +189,7 @@ function WorkExperienceFormField({
                   <FormLabel>Start Date</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Company Name"
+                      
                       {...field}
                       type="date"
                       value={field.value?.slice(0, 10)}
@@ -208,7 +208,6 @@ function WorkExperienceFormField({
                   <FormLabel>End Date</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Company Name"
                       {...field}
                       type="date"
                       value={field.value?.slice(0, 10)}

@@ -12,7 +12,8 @@ import { EditorFormProps } from "@/lib/types";
 import { educationSchema, EducationValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import debounce from "lodash.debounce";
-import React, { useEffect } from "react";
+import { ChevronDown, ChevronUp, GripHorizontal, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 
 export default function EducationForm({
@@ -79,7 +80,6 @@ export default function EducationForm({
                   degree: "",
                   startDate: "",
                   endDate: "",
-                  
                 })
               }
             >
@@ -99,33 +99,108 @@ interface EducationFormFieldProps {
 }
 
 function EducationFormField({ index, form, remove }: EducationFormFieldProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
+        <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
         <h3 className="text-lg font-semibold">Education {index + 1}</h3>
-        <button
-          type="button"
-          onClick={() => remove(index)}
-          className="text-red-500 hover:text-red-700"
-        >
-          Remove
-        </button>
-      </div>
 
-      {/* Add your form fields here */}
-      <FormField
-        control={form.control}
-        name={`educations.${index}.institution`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Institution</FormLabel>
-            <FormControl>
-              <Input placeholder="Institution Name" {...field} autoFocus />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <div className="flex gap-2">
+          <Button
+            variant="ghost"
+            type="button"
+            onClick={() => setIsCollapsed((prev) => !prev)}
+          >
+            {isCollapsed ? (
+              <ChevronDown size="5" strokeWidth="3px" />
+            ) : (
+              <ChevronUp size="5" strokeWidth="3px" />
+            )}
+          </Button>
+          <Button variant="ghost" type="button" onClick={() => remove(index)}>
+            <X
+              strokeWidth="3px"
+              size="5"
+              className="text-destructive h-6 w-6 cursor-pointer font-bold"
+            />
+          </Button>
+        </div>
+      </div>
+      {!isCollapsed && (
+        <>
+          {/* Institution */}
+          <FormField
+            control={form.control}
+            name={`educations.${index}.institution`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Institution</FormLabel>
+                <FormControl>
+                  <Input placeholder="Institution Name" {...field} autoFocus />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* degree */}
+          <FormField
+            control={form.control}
+            name={`educations.${index}.degree`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Degree</FormLabel>
+                <FormControl>
+                  <Input placeholder="MBA" {...field} autoFocus />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="grid grid-cols-2 gap-3">
+            {" "}
+            {/* startDate */}
+            <FormField
+              control={form.control}
+              name={`educations.${index}.startDate`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Start Date</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="date"
+                      value={field.value?.slice(0, 10)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* enddate */}
+            <FormField
+              control={form.control}
+              name={`educations.${index}.endDate`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>End Date</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      type="date"
+                      value={field.value?.slice(0, 10)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
