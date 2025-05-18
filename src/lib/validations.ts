@@ -76,6 +76,12 @@ export const skillsSchema = z.object({
 });
 export type SkillsValues = z.infer<typeof skillsSchema>;
 
+//summaryForm
+export const summarySchema = z.object({
+  summary: optionalString,
+});
+export type SummaryValues = z.infer<typeof summarySchema>;
+
 //resumeSchema its a combination of all the schemas flattened with shape
 export const resumeSchema = z.object({
   ...generalInfoFormSchema.shape,
@@ -83,6 +89,7 @@ export const resumeSchema = z.object({
   ...workExperienceSchema.shape,
   ...educationSchema.shape,
   ...skillsSchema.shape,
+  ...summarySchema.shape,
 });
 
 //but it clashes with the photo in the personalInfoSchema so we need to omit it

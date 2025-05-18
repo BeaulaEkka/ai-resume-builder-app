@@ -1,12 +1,14 @@
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { skillsSchema, SkillsValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,16 +68,21 @@ export default function SkillsForm({
             name="skills"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Skills</FormLabel>
+                <FormLabel className="sr-only">Skills</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your skills"
-                    value={field.value}
+                  <Textarea
+                    {...field}
+                    placeholder="e.g: React, JavaScript, TypeScript, etc."
                     onChange={(e) => {
-                      field.onChange(e.target.value);
+                      const skills = e.target.value.split(",");
+                      field.onChange(skills);
                     }}
+                    className="min-h-20 resize-y overflow-hidden"
                   />
                 </FormControl>
+                <FormDescription className="text-sm">
+                  Seperate each skill with a comma.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
