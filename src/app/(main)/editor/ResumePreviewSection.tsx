@@ -1,6 +1,5 @@
 import ResumePreview from "@/components/ResumePreview";
 import { ResumeValues } from "@/lib/validations";
-import React from "react";
 
 interface ResumePreviewSectionProps {
   resumeData: ResumeValues;
@@ -12,7 +11,12 @@ export default function ResumePreviewSection({
 }: ResumePreviewSectionProps) {
   return (
     <div className="hidden w-1/2 md:flex">
-      <ResumePreview resumeData={resumeData} />
+      <div className="bg-secondary flex w-full justify-center overflow-y-auto p-3">
+        <ResumePreview
+          resumeData={resumeData}
+          className="max-w-2xl shadow-md"
+        />
+      </div>
     </div>
   );
 }
