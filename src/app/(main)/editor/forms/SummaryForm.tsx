@@ -4,6 +4,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
@@ -60,7 +61,7 @@ export default function SummaryForm({
             name="summary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Summary</FormLabel>
+                <FormLabel>Professional Summary</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
@@ -68,6 +69,7 @@ export default function SummaryForm({
                     placeholder="Tell us about yourself.."
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
