@@ -48,10 +48,13 @@ export default function ResumeEditor() {
             right
             <pre>{JSON.stringify(resumeData, null, 2)}</pre>
           </div> */}
-          <ResumePreviewSection
-            resumeData={resumeData}
-            setResumeData={setResumeData}
-          />
+        
+           
+            <ResumePreviewSection
+              resumeData={resumeData}
+              setResumeData={setResumeData}
+            />
+          
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
