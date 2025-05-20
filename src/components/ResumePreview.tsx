@@ -1,8 +1,6 @@
 import PersonalInfoHeader from "@/app/(main)/editor/components/PersonalInfoHeader";
 import { cn } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validations";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export interface ResumePreviewProps {
   resumeData: ResumeValues;
@@ -26,6 +24,3 @@ export default function ResumePreview({
     </div>
   );
 }
-
-
-

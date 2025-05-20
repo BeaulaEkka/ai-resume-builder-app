@@ -39,6 +39,8 @@ model Resume {
   phone        String?
   email        String?
 
+  layout String @default("default")
+
   workExperiences WorkExperience[]
   educations      Education[]
   skills          String[]

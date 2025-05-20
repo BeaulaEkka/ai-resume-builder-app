@@ -10,10 +10,9 @@ interface ResumePreviewSectionProps {
 }
 export default function ResumePreviewSection({
   resumeData,
-  setResumeData,
+
   selectedLayout = "default",
 }: ResumePreviewSectionProps) {
- 
   const layoutComponents = {
     default: ResumePreview,
     modern: ModernLayout,

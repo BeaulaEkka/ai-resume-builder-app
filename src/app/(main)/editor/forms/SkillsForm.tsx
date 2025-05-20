@@ -7,7 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+
 import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { skillsSchema, SkillsValues } from "@/lib/validations";
