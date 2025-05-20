@@ -54,14 +54,23 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
       setPhotoSrc(objectUrl);
       if (photo === null) {
         setPhotoSrc(""); //to remove the preview
-        return()=> URL.revokeObjectURL(objectUrl);
+        return () => URL.revokeObjectURL(objectUrl);
       }
     }
   }, [photo]);
 
   return (
     <div className="flex flex-col gap-2">
-      <Image src="photoSrc" alt="profile image" width={250} height={250} />
+      {photoSrc && (
+        <Image
+          src="photoSrc"
+          alt="profile image"
+          width={250}
+          height={250}
+          className="aspect-square object-cover"
+        />
+      )}
+
       <h1 className="text-3xl font-bold">{resumeData.firstName}</h1>
       <h1 className="text-3xl font-bold">{resumeData.lastName}</h1>
       <p className="text-lg">{resumeData.description}</p>
