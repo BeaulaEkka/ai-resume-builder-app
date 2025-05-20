@@ -53,29 +53,40 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
   }, [photo]);
 
   return (
-    <div className="border-border-green-500 flex flex-col gap-2">
-      {photoSrc && (
-        <div className="h-50 w-50">
-          <Image
-            src={photoSrc}
-            alt="profile image"
-            width={50}
-            height={50}
-            className="aspect-square object-cover"
-          />
+    <div className="flex border">
+      <div className="flex gap-5">
+        <div className="flex flex-col gap-2">
+          {photoSrc && (
+            <Image
+              src={photoSrc}
+              alt="profile image"
+              width={110}
+              height={110}
+              className="aspect-square object-cover"
+            />
+          )}
         </div>
-      )}
-      <div className="flex gap-2 text-3xl font-bold">
-        <h1>{firstName}</h1>
-        <h1>{lastName}</h1>
-      </div>
+        <div>
+          <div className="flex gap-2 border text-3xl font-bold uppercase">
+            <h1>{firstName}</h1>
+            <h1>{lastName}</h1>
+          </div>
 
-      <p className="text-lg">{jobTitle}</p>
-      <p>{city}</p>
-      <p>{zipCode}</p>
-      <p>{country}</p>
-      <p>{email}</p>
-      <p>{phone}</p>
+          <p className="text-lg">{jobTitle}</p>
+          <div className="text-sm text-gray-400">
+            <div className="flex gap-2">
+              <p>{city}</p>
+
+              <p>{zipCode}</p>
+              <p>{country}</p>
+            </div>
+            <div className="flex">
+              <p>{email}</p>
+              <p>{phone}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
