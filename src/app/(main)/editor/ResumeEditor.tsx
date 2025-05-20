@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import { useState } from "react";
 import { ResumeValues } from "@/lib/validations";
 import ResumePreviewSection from "./ResumePreviewSection";
+import LayoutIcon from "./components/LayoutIcon";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
@@ -19,6 +20,10 @@ export default function ResumeEditor() {
     newSearchParams.set("step", key);
     window.history.pushState(null, "", `?${newSearchParams}`); //this can also be achieved with router.push(`/editor?${newSearchParams}`); but there is a delay
   };
+
+  const [selectedLayout, setSelectedLayout] = useState<
+    "default" | "modern" | "elegant"
+  >("default");
 
   const FormComponent = steps.find(
     (step) => step.key === currentStep,
@@ -44,17 +49,29 @@ export default function ResumeEditor() {
             )}
           </div>
           <div className="grow md:border" />
-          {/* <div >
-            right
-            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
-          </div> */}
-        
-           
-            <ResumePreviewSection
-              resumeData={resumeData}
-              setResumeData={setResumeData}
+          {/* Layout switcher UI */}
+          <div className="mb-4 flex flex-col gap-4">
+            <LayoutIcon
+              label="Default"
+              selected={selectedLayout === "default"}
+              onClick={() => setSelectedLayout("default")}
             />
-          
+            <LayoutIcon
+              label="Modern"
+              selected={selectedLayout === "modern"}
+              onClick={() => setSelectedLayout("modern")}
+            />
+            <LayoutIcon
+              label="Elegant"
+              selected={selectedLayout === "elegant"}
+              onClick={() => setSelectedLayout("elegant")}
+            />
+          </div>
+          <ResumePreviewSection
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+            selectedLayout={selectedLayout}
+          />
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />

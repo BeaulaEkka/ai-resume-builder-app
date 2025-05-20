@@ -23,6 +23,7 @@ export default function ResumePreviewSection({
         <ResumePreview
           resumeData={resumeData}
           className="max-w-2xl shadow-md"
+          
         />
       </div>
     </div>
