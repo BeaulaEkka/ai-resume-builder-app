@@ -28,6 +28,7 @@ export default function ResumeEditor() {
   const FormComponent = steps.find(
     (step) => step.key === currentStep,
   )?.component;
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="space-y-1 border-b px-3 py-5 text-center">
@@ -49,6 +50,12 @@ export default function ResumeEditor() {
             )}
           </div>
           <div className="grow md:border" />
+
+          <ResumePreviewSection
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+            selectedLayout={selectedLayout}
+          />
           {/* Layout switcher UI */}
           <div className="mb-4 flex flex-col gap-4">
             <LayoutIcon
@@ -67,11 +74,6 @@ export default function ResumeEditor() {
               onClick={() => setSelectedLayout("elegant")}
             />
           </div>
-          <ResumePreviewSection
-            resumeData={resumeData}
-            setResumeData={setResumeData}
-            selectedLayout={selectedLayout}
-          />
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
