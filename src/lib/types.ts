@@ -6,3 +6,8 @@ export interface EditorFormProps {
   resumeData: ResumeValues;
   setResumeData: (data: ResumeValues) => void;
 }
+
+export interface LayoutPropTypes {
+  resumeData: ResumeValues;
+  className?: string;
+}

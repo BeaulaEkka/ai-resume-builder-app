@@ -1,16 +1,11 @@
 import PersonalInfoHeader from "@/app/(main)/editor/components/PersonalInfoHeader";
+import { LayoutPropTypes } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ResumeValues } from "@/lib/validations";
-
-export interface ResumePreviewProps {
-  resumeData: ResumeValues;
-  className?: string;
-}
 
 export default function DefaultLayout({
   resumeData,
   className,
-}: ResumePreviewProps) {
+}: LayoutPropTypes) {
   return (
     <div
       className={cn("aspect-[210/297] w-full bg-white text-black", className)}
