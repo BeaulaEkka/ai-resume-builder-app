@@ -1,7 +1,7 @@
-import ResumePreview from "@/components/ResumePreview";
 import { ResumeValues } from "@/lib/validations";
 import ModernLayout from "./layoutStyles/ModernLayout";
 import ElegantLayout from "./layoutStyles/ElegantLayout";
+import DefaultLayout from "./layoutStyles/DefaultLayout";
 
 interface ResumePreviewSectionProps {
   resumeData: ResumeValues;
@@ -14,7 +14,7 @@ export default function ResumePreviewSection({
   selectedLayout = "default",
 }: ResumePreviewSectionProps) {
   const layoutComponents = {
-    default: ResumePreview,
+    default: DefaultLayout,
     modern: ModernLayout,
     elegant: ElegantLayout,
   };
@@ -24,13 +24,9 @@ export default function ResumePreviewSection({
   return (
     <div className="hidden w-1/2 md:flex">
       <div className="bg-secondary flex w-full justify-center overflow-y-auto border border-red-500 p-3">
-        {/* <ResumePreview
-          resumeData={resumeData}
-          className="max-w-2xl shadow-md"
-        /> */}
         <SelectedLayoutComponent
           resumeData={resumeData}
-          className="max-w-2xl shadow-md"
+          className="max-w-2xl p-8 shadow-md"
         />
       </div>
     </div>
