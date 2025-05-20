@@ -82,9 +82,7 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
               <p>{country}</p>
             </div>
             <div className="flex">
-              <p>{email}</p>
-              {email && phone ? " | " : ""}
-              <p>{phone}</p>
+              {[phone, email].filter(Boolean).join(" | ")}
             </div>
           </div>
         </div>
