@@ -76,12 +76,14 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           <div className="text-sm text-gray-400">
             <div className="flex gap-2">
               <p>{city}</p>
-
+              {city && zipCode ? " | " : ""}
               <p>{zipCode}</p>
+              {zipCode && country ? " | " : ""}
               <p>{country}</p>
             </div>
             <div className="flex">
               <p>{email}</p>
+              {email && phone ? " | " : ""}
               <p>{phone}</p>
             </div>
           </div>
