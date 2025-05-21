@@ -1,5 +1,6 @@
 import { LayoutPropTypes } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 export default function DefaultLayout({
   resumeData,
@@ -12,6 +13,7 @@ export default function DefaultLayout({
       <div>
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
+        <WorkExperienceSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -111,8 +113,32 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
   const { workExperiences } = resumeData;
   if (!workExperiences) return null;
 
-  const workExperiencesNotEmpty = workExperiences?.filter((exp) =>
-    object.values(exp),
+  //only show exp that is not empty
+  const workExperiencesNotEmpty = workExperiences?.filter(
+    (exp) => Object.values(exp).filter(Boolean).length > 0,
   );
-  return <></>;
+  if (!workExperiencesNotEmpty?.length) return null;
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-lg font-semibold">Work Experiences</p>
+        {workExperiencesNotEmpty.map((exp, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-sm font-semibold">
+              <p>{exp?.company}</p>
+              <div className="flex gap-2">
+                {exp.startDate && <span>
+                  formatDate(exp.startDate)</span>}
+
+                <p>{exp?.endDate}</p>
+              </div>
+              <p>{exp?.position}</p>
+              <p>{exp?.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
