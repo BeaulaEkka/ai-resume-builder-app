@@ -13,7 +13,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { workExperienceSchema, WorkExperienceValues } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import debounce from "lodash.debounce";
 import { ChevronDown, ChevronUp, GripHorizontal, X } from "lucide-react";
 import { useEffect, useState } from "react";

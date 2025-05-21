@@ -11,7 +11,7 @@ export default function DefaultLayout({
     >
       <div>
         <PersonalInfoHeader resumeData={resumeData} />
-        <SummaryInfo resumeData={resumeData} />
+        <SummarySection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -92,15 +92,27 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
   );
 }
 
-function SummaryInfo({ resumeData }: ResumeSectionProps) {
+function SummarySection({ resumeData }: ResumeSectionProps) {
   const { summary } = resumeData;
   if (!summary) return null;
 
   return (
     <>
       <hr className="border-2" />
-      <h1 className="text-2xl font-bold">Summary</h1>
-      <p>{summary}</p>
+      <div className="break-inside-avoid space-y-3">
+        <h1 className="text-2xl font-bold">Professional Profile</h1>
+      </div>
+      <p className="text-sm whitespace-pre-line">{summary}</p>
     </>
   );
+}
+
+function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
+  const { workExperiences } = resumeData;
+  if (!workExperiences) return null;
+
+  const workExperiencesNotEmpty = workExperiences?.filter((exp) =>
+    object.values(exp),
+  );
+  return <></>;
 }
