@@ -11,6 +11,7 @@ export default function DefaultLayout({
     >
       <div>
         <PersonalInfoHeader resumeData={resumeData} />
+        <SummaryInfo resumeData={resumeData} />
       </div>
     </div>
   );
@@ -88,5 +89,18 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function SummaryInfo({ resumeData }: ResumeSectionProps) {
+  const { summary } = resumeData;
+  if (!summary) return null;
+
+  return (
+    <>
+      <hr className="border-2" />
+      <h1 className="text-2xl font-bold">Summary</h1>
+      <p>{summary}</p>
+    </>
   );
 }
