@@ -1,6 +1,6 @@
 import { LayoutPropTypes } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import { formatDate } from "date-fns";
 
 export default function DefaultLayout({
   resumeData,
@@ -115,7 +115,8 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
 
   //only show exp that is not empty
   const workExperiencesNotEmpty = workExperiences?.filter(
-    (exp) => Object.values(exp).filter(Boolean).length > 0,
+    (exp): exp is NonNullable<typeof exp> =>
+      exp !== undefined && Object.values(exp).filter(Boolean).length > 0,
   );
   if (!workExperiencesNotEmpty?.length) return null;
   return (
@@ -125,15 +126,17 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
         <p className="text-lg font-semibold">Work Experiences</p>
         {workExperiencesNotEmpty.map((exp, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
-            <div className="flex items-center justify-between text-sm font-semibold">
+            <div className="flex flex-col justify-between text-sm font-semibold">
               <p>{exp?.company}</p>
               <div className="flex gap-2">
-                {exp.startDate && <span>
-                  formatDate(exp.startDate)</span>}
-
-                <p>{exp?.endDate}</p>
+                {exp.startDate && (
+                  <span>
+                    {formatDate(exp.startDate, "MMM yy")} -{" "}
+                    {exp.endDate && formatDate(exp.endDate, "MMM yy")}
+                  </span>
+                )}
               </div>
-              <p>{exp?.position}</p>
+              <p className="font semibold text-xs">{exp?.position}</p>
               <p>{exp?.description}</p>
             </div>
           </div>
