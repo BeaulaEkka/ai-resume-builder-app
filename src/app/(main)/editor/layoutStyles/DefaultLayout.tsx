@@ -40,6 +40,8 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
     city,
     country,
     zipCode,
+    colorHex,
+    borderStyle,
   } = resumeData;
 
   //photot is string
@@ -214,7 +216,7 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
         <div className="flex flex-wrap gap-2">
           {skillsNotEmpty?.map((skill, index) => (
             <p key={index} className="pt-3">
-              <Badge className="rounded-md bg-gray-950 hover:bg-black px-2 py-1 text-xs font-semibold text-white">
+              <Badge className="rounded-md bg-gray-950 px-2 py-1 text-xs font-semibold text-white hover:bg-black">
                 {skill}
               </Badge>
             </p>

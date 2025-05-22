@@ -90,6 +90,8 @@ export const resumeSchema = z.object({
   ...educationSchema.shape,
   ...skillsSchema.shape,
   ...summarySchema.shape,
+  colorHex: optionalString,
+  borderStyle: optionalString,
 });
 
 //but it clashes with the photo in the personalInfoSchema so we need to omit it
