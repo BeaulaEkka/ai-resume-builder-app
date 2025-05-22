@@ -14,6 +14,8 @@ export default function DefaultLayout({
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
         <WorkExperienceSection resumeData={resumeData} />
+        <EducationSection resumeData={resumeData} />
+        <SkillsSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -22,6 +24,7 @@ export default function DefaultLayout({
 import { ResumeValues } from "@/lib/validations";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Divide } from "lucide-react";
 
 interface ResumeSectionProps {
   resumeData: ResumeValues;
@@ -124,24 +127,100 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
       <hr className="border-2" />
       <div className="space-y-3">
         <p className="text-lg font-semibold">Work Experiences</p>
+        <div className="border-2" />
         {workExperiencesNotEmpty.map((exp, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
             <div className="flex flex-col justify-between text-sm font-semibold">
-              <p>{exp?.company}</p>
-              <div className="flex gap-2">
-                {exp.startDate && (
-                  <span>
-                    {formatDate(exp.startDate, "MMM yy")} -{" "}
-                    {exp.endDate && formatDate(exp.endDate, "MMM yy")}
-                  </span>
-                )}
+              <div className="flex justify-between pt-3">
+                <p className="text-md font-bold">{exp?.company}</p>{" "}
+                <div className="flex gap-2">
+                  {exp.startDate && (
+                    <span>
+                      {formatDate(exp.startDate, "MMM yy")} -{" "}
+                      {exp.endDate
+                        ? formatDate(exp.endDate, "MMM yy")
+                        : "present"}
+                    </span>
+                  )}
+                </div>
               </div>
-              <p className="font semibold text-xs">{exp?.position}</p>
-              <p>{exp?.description}</p>
+
+              <p className="font semibold">{exp?.position}</p>
+              <p className="pt-2">{exp?.description}</p>
             </div>
           </div>
         ))}
       </div>
     </>
+  );
+}
+
+function EducationSection({ resumeData }: ResumeSectionProps) {
+  const { educations } = resumeData;
+  if (!educations) return null;
+
+  //only show exp that is not empty
+  const educationsNotEmpty = educations?.filter(
+    (edu): edu is NonNullable<typeof edu> =>
+      edu !== undefined && Object.values(edu).filter(Boolean).length > 0,
+  );
+  if (!educationsNotEmpty?.length) return null;
+  return (
+    <>
+      <div>
+        <hr className="border-2" />
+        <div className="space-y-3">
+          <p className="text-lg font-semibold">Education</p>
+          <div className="border-2" />
+          {educationsNotEmpty?.map((edu, index) => (
+            <div key={index} className="pt-3">
+              <h1 className="text-md font-bold">{edu?.degree}</h1>
+
+              <p>{edu?.institution}</p>
+              <div className="flex gap-2">
+                {edu.startDate && (
+                  <span className="text-sm text-gray-400">
+                    {formatDate(edu.startDate, "MMM yy")} -{" "}
+                    {edu.endDate
+                      ? formatDate(edu.endDate, "MMM yy")
+                      : "present"}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function SkillsSection({ resumeData }: ResumeSectionProps) {
+  const { skills } = resumeData;
+  if (!skills) return null;
+
+  //only show exp that is not empty
+  const skillsNotEmpty = skills?.filter(
+    (skill): skill is NonNullable<typeof skill> =>
+      skill !== undefined && Object.values(skill).filter(Boolean).length > 0,
+  );
+  if (!skillsNotEmpty?.length) return null;
+
+  return (
+    <div>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-lg font-semibold">Skills</p>
+        <div className="flex flex-wrap gap-2">
+          {skillsNotEmpty?.map((skill, index) => (
+            <p key={index} className="pt-3">
+              <p className="rounded-md bg-gray-500 px-2 py-1 text-xs font-semibold text-white">
+                {skill}
+              </p>
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
