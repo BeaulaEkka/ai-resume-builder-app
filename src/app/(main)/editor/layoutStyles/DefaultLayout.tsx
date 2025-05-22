@@ -24,6 +24,7 @@ export default function DefaultLayout({
 import { ResumeValues } from "@/lib/validations";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 
 interface ResumeSectionProps {
   resumeData: ResumeValues;
@@ -213,9 +214,9 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
         <div className="flex flex-wrap gap-2">
           {skillsNotEmpty?.map((skill, index) => (
             <p key={index} className="pt-3">
-              <p className="rounded-md bg-gray-950 px-2 py-1 text-xs font-semibold text-white">
+              <Badge className="rounded-md bg-gray-950 hover:bg-black px-2 py-1 text-xs font-semibold text-white">
                 {skill}
-              </p>
+              </Badge>
             </p>
           ))}
         </div>
