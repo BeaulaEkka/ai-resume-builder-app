@@ -75,7 +75,10 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           )}
         </div>
         <div>
-          <div className="flex gap-2 border text-3xl font-bold uppercase">
+          <div
+            className="flex gap-2 border text-3xl font-bold uppercase"
+            style={{ color: colorHex }}
+          >
             <h1>{firstName}</h1>
             <h1>{lastName}</h1>
           </div>

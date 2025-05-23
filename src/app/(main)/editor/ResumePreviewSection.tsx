@@ -11,6 +11,7 @@ interface ResumePreviewSectionProps {
 }
 export default function ResumePreviewSection({
   resumeData,
+  setResumeData,
 
   selectedLayout = "default",
 }: ResumePreviewSectionProps) {
@@ -25,7 +26,7 @@ export default function ResumePreviewSection({
   return (
     <div className="relative hidden w-1/2 md:flex">
       <div className="bg-secondary flex w-full justify-center overflow-y-auto border border-red-500 p-3">
-        <div>
+        <div className="absolute top-0 left-0 z-10">
           <ColorPicker
             color={resumeData.colorHex}
             onChange={(color) =>
