@@ -103,14 +103,16 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
 }
 
 function SummarySection({ resumeData }: ResumeSectionProps) {
-  const { summary } = resumeData;
+  const { summary, colorHex } = resumeData;
   if (!summary) return null;
 
   return (
     <>
-      <hr className="border-2" />
+      <hr className="border-2" style={{ borderColor: colorHex }} />
       <div className="break-inside-avoid space-y-3">
-        <h1 className="text-2xl font-bold">Professional Profile</h1>
+        <h1 className="text-2xl font-bold" style={{ color: colorHex }}>
+          Professional Profile
+        </h1>
       </div>
       <p className="text-sm whitespace-pre-line">{summary}</p>
     </>
