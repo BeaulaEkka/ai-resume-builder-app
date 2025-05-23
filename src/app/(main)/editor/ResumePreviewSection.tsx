@@ -28,7 +28,7 @@ export default function ResumePreviewSection({
       <div className="bg-secondary flex w-full justify-center overflow-y-auto border border-red-500 p-3">
         <div className="absolute top-0 left-0 z-10">
           <ColorPicker
-            color={resumeData.colorHex}
+            color={resumeData.colorHex || "#aabbcc"}
             onChange={(color) =>
               setResumeData({ ...resumeData, colorHex: color })
             }
