@@ -2,6 +2,7 @@ import { ResumeValues } from "@/lib/validations";
 import ModernLayout from "./layoutStyles/ModernLayout";
 import ElegantLayout from "./layoutStyles/ElegantLayout";
 import DefaultLayout from "./layoutStyles/DefaultLayout";
+import ColorPicker from "./ColorPicker";
 
 interface ResumePreviewSectionProps {
   resumeData: ResumeValues;
@@ -22,8 +23,16 @@ export default function ResumePreviewSection({
   const SelectedLayoutComponent = layoutComponents[selectedLayout];
 
   return (
-    <div className="hidden w-1/2 md:flex">
+    <div className="relative hidden w-1/2 md:flex">
       <div className="bg-secondary flex w-full justify-center overflow-y-auto border border-red-500 p-3">
+        <div>
+          <ColorPicker
+            color={resumeData.colorHex}
+            onChange={(color) =>
+              setResumeData({ ...resumeData, colorHex: color })
+            }
+          />
+        </div>
         <SelectedLayoutComponent
           resumeData={resumeData}
           className="max-w-2xl p-8 shadow-md"
