@@ -106,9 +106,12 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
   const { summary, colorHex } = resumeData;
   if (!summary) return null;
 
+  const color = colorHex || "#000"; // fallback to black
+  console.log("colorHex in SummarySection:", colorHex);
+  
   return (
     <>
-      <hr className="border-2" style={{ borderColor: colorHex }} />
+      <hr className="border-2" style={{ borderColor: color }} />
       <div className="break-inside-avoid space-y-3">
         <h1 className="text-2xl font-bold" style={{ color: colorHex }}>
           Professional Profile
