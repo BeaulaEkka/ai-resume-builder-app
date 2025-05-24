@@ -124,7 +124,7 @@ function WorkExperienceFormField({
     <div className="bg-background space-y-3 rounded-md border p-3">
       <div className="gap- flex items-center justify-between">
         <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
-        <span className="text-md">{getExperienceLabel()}</span>
+        <span className="text-sm font-semibold capitalize">{getExperienceLabel()}</span>
 
         <div className="flex gap-2">
           <Button

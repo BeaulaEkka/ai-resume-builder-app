@@ -27,6 +27,8 @@ export default function EducationForm({
     },
   });
 
+
+
   useEffect(() => {
     const debouncedValidateAndUpdate = debounce(async (values) => {
       const isValid = await form.trigger();
@@ -74,6 +76,7 @@ export default function EducationForm({
           <div className="flex justify-center">
             <Button
               type="button"
+              aria-label="Add Education"
               onClick={() =>
                 append({
                   institution: "",
@@ -100,17 +103,22 @@ interface EducationFormFieldProps {
 
 function EducationFormField({ index, form, remove }: EducationFormFieldProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  function getEducationLabel() {
+    const degree = form.getValues(`educations.${index}.degree`);
+    return degree?.trim() ? degree : `Education ${index + 1}`;
+  }
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <GripHorizontal className="text-muted-foreground size-5 cursor-grab" />
-        <h3 className="text-lg font-semibold">Education {index + 1}</h3>
+        <h3 className="text-lg font-semibold">{getEducationLabel()}</h3>
 
         <div className="flex gap-2">
           <Button
             variant="ghost"
             type="button"
+            aria-label="Collapse"
             onClick={() => setIsCollapsed((prev) => !prev)}
           >
             {isCollapsed ? (
@@ -153,7 +161,7 @@ function EducationFormField({ index, form, remove }: EducationFormFieldProps) {
               <FormItem>
                 <FormLabel>Degree</FormLabel>
                 <FormControl>
-                  <Input placeholder="MBA" {...field} autoFocus />
+                  <Input placeholder="MBA" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

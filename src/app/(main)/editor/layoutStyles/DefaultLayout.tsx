@@ -61,7 +61,7 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
   }, [photo]);
 
   return (
-    <div className="flex">
+    <div className="flex pb-3">
       <div className="flex gap-5">
         <div className="flex flex-col gap-2">
           {photoSrc && (
@@ -134,16 +134,19 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
   return (
     <>
       <hr className="border-2" style={{ borderColor: colorHex }} />
-      <div className="space-y-3">
-        <p className="pt-3 text-xl font-bold" style={{ color: colorHex }}>
+      <div>
+        <p
+          className=" pt-3 text-xl font-bold"
+          style={{ color: colorHex }}
+        >
           Work Experiences
         </p>
         {workExperiencesNotEmpty.map((exp, index) => (
-          <div key={index} className="break-inside-avoid space-y-1">
+          <div key={index} className="break-inside-avoid">
             <div className="flex flex-col justify-between text-sm">
               <div className="flex justify-between pt-3">
-                <p className="text-lg font-bold">{exp?.company}</p>{" "}
-                <div className="flex gap-2">
+                <p className="text-lg font-bold capitalize">{exp?.company}</p>{" "}
+                <div className="text-gray-500 flex gap-2">
                   {exp.startDate && (
                     <span>
                       {formatDate(exp.startDate, "MMM yy")} -{" "}
@@ -155,7 +158,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
                 </div>
               </div>
 
-              <p className="text-gray-400">{exp?.position}</p>
+              <p className="text-gray-400 capitalize">{exp?.position}</p>
               <p className="py-3">{exp?.description}</p>
             </div>
           </div>
@@ -185,12 +188,12 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
           </p>
 
           {educationsNotEmpty?.map((edu, index) => (
-            <div key={index} className="py-3">
+            <div key={index} className="pb-3">
               <div className="flex justify-between">
                 <h1 className="text-md font-bold">{edu?.degree}</h1>
                 <div className="flex gap-2">
                   {edu.startDate && (
-                    <span className="text-sm text-gray-400">
+                    <span className="text-sm text-gray-500">
                       {formatDate(edu.startDate, "MMM yy")} -{" "}
                       {edu.endDate
                         ? formatDate(edu.endDate, "MMM yy")
@@ -200,7 +203,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
                 </div>
               </div>
 
-              <p className="text-gray-500 text-sm">{edu?.institution}</p>
+              <p className="text-sm text-gray-500">{edu?.institution}</p>
             </div>
           ))}
         </div>
@@ -224,7 +227,7 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
     <div>
       <hr className="border-2" style={{ borderColor: colorHex }} />
       <div className="space-y-3">
-        <p className="text-xl font-bold pt-3" style={{ color: colorHex }}>
+        <p className="pt-3 text-xl font-bold" style={{ color: colorHex }}>
           Skills
         </p>
         <div className="flex flex-wrap gap-2">
