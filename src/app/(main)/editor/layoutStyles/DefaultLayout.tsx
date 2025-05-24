@@ -108,7 +108,7 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
 
   const color = colorHex || "#000"; // fallback to black
   console.log("colorHex in SummarySection:", colorHex);
-  
+
   return (
     <>
       <hr className="border-2" style={{ borderColor: color }} />
@@ -123,7 +123,7 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
 }
 
 function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
-  const { workExperiences } = resumeData;
+  const { workExperiences, colorHex } = resumeData;
   if (!workExperiences) return null;
 
   //only show exp that is not empty
@@ -134,9 +134,11 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
   if (!workExperiencesNotEmpty?.length) return null;
   return (
     <>
-      <hr className="border-2" />
+      <hr className="border-2" style={{ borderColor: colorHex }} />
       <div className="space-y-3">
-        <p className="text-lg font-semibold">Work Experiences</p>
+        <p className="text-lg font-semibold" style={{ color: colorHex }}>
+          Work Experiences
+        </p>
         <div className="border-2" />
         {workExperiencesNotEmpty.map((exp, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
@@ -166,7 +168,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
 }
 
 function EducationSection({ resumeData }: ResumeSectionProps) {
-  const { educations } = resumeData;
+  const { educations, colorHex } = resumeData;
   if (!educations) return null;
 
   //only show exp that is not empty
@@ -178,9 +180,11 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
   return (
     <>
       <div>
-        <hr className="border-2" />
+        <hr className="border-2" style={{ borderColor: colorHex }} />
         <div className="space-y-3">
-          <p className="text-lg font-semibold">Education</p>
+          <p className="text-lg font-semibold" style={{ color: colorHex }}>
+            Education
+          </p>
           <div className="border-2" />
           {educationsNotEmpty?.map((edu, index) => (
             <div key={index} className="pt-3">
@@ -206,7 +210,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
 }
 
 function SkillsSection({ resumeData }: ResumeSectionProps) {
-  const { skills } = resumeData;
+  const { skills, colorHex } = resumeData;
   if (!skills) return null;
 
   //only show exp that is not empty
@@ -218,13 +222,18 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
 
   return (
     <div>
-      <hr className="border-2" />
+      <hr className="border-2" style={{ borderColor: colorHex }} />
       <div className="space-y-3">
-        <p className="text-lg font-semibold">Skills</p>
+        <p className="text-lg font-semibold" style={{ color: colorHex }}>
+          Skills
+        </p>
         <div className="flex flex-wrap gap-2">
           {skillsNotEmpty?.map((skill, index) => (
             <p key={index} className="pt-3">
-              <Badge className="rounded-md bg-gray-950 px-2 py-1 text-xs font-semibold text-white hover:bg-black">
+              <Badge
+                className="rounded-md bg-gray-950 px-2 py-1 text-xs font-semibold text-white hover:bg-black"
+                style={{ backgroundColor: colorHex }}
+              >
                 {skill}
               </Badge>
             </p>
