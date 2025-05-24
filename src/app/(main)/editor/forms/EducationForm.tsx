@@ -27,8 +27,6 @@ export default function EducationForm({
     },
   });
 
-
-
   useEffect(() => {
     const debouncedValidateAndUpdate = debounce(async (values) => {
       const isValid = await form.trigger();
