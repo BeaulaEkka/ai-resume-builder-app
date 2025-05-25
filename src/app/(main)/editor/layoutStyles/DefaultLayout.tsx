@@ -135,10 +135,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
     <>
       <hr className="border-2" style={{ borderColor: colorHex }} />
       <div>
-        <p
-          className=" pt-3 text-xl font-bold"
-          style={{ color: colorHex }}
-        >
+        <p className="pt-3 text-xl font-bold" style={{ color: colorHex }}>
           Work Experiences
         </p>
         {workExperiencesNotEmpty.map((exp, index) => (
@@ -146,7 +143,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
             <div className="flex flex-col justify-between text-sm">
               <div className="flex justify-between pt-3">
                 <p className="text-lg font-bold capitalize">{exp?.company}</p>{" "}
-                <div className="text-gray-500 flex gap-2">
+                <div className="flex gap-2 text-gray-500">
                   {exp.startDate && (
                     <span>
                       {formatDate(exp.startDate, "MMM yy")} -{" "}
