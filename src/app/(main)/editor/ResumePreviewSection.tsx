@@ -3,6 +3,7 @@ import ModernLayout from "./layoutStyles/ModernLayout";
 import ElegantLayout from "./layoutStyles/ElegantLayout";
 import DefaultLayout from "./layoutStyles/DefaultLayout";
 import ColorPicker from "./ColorPicker";
+import BorderStyleButton from "./components/BorderStyleButton";
 
 interface ResumePreviewSectionProps {
   resumeData: ResumeValues;
@@ -32,6 +33,12 @@ export default function ResumePreviewSection({
             onChange={(color) =>
               setResumeData({ ...resumeData, colorHex: color })
             }
+          />
+          <BorderStyleButton
+            onChange={(borderStyle) =>
+              setResumeData({ ...resumeData, borderStyle })
+            }
+            borderStyle={resumeData.borderStyle}
           />
         </div>
         <SelectedLayoutComponent
