@@ -24,10 +24,10 @@ export default function ColorPicker({ color, onChange }: ColorPickerProps) {
           size="icon"
           title="Change resume color"
           onClick={() => setShowPopover(!showPopover)}
-          className="rounded-md border border-gray-300 bg-white p-2 text-gray-500 hover:bg-gray-100"
+          className="rounded-md border border-gray-300 bg-white p-2  hover:bg-gray-100"
           aria-label="Pick a color"
         >
-          <PaletteIcon className="size-5" />{" "}
+          <PaletteIcon className="size-6 " />{" "}
         </Button>
       </PopoverTrigger>
 

@@ -27,7 +27,7 @@ export default function ResumePreviewSection({
   return (
     <div className="hidden w-1/2 md:flex">
       <div className="group bg-secondary relative flex w-full justify-center overflow-y-auto p-3">
-        <div className="opacity-30  absolute top-2 left-2 z-10 flex flex-col gap-2  group-hover:opacity-100 xl-opacity-100">
+        <div className="xl-opacity-100 absolute top-2 left-2 z-10 flex flex-col gap-2 opacity-30 transition-opacity group-hover:opacity-100">
           <ColorPicker
             color={resumeData.colorHex || "#aabbcc"}
             onChange={(color) =>
