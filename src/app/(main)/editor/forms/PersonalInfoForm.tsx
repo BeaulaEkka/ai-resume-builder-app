@@ -9,10 +9,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { personalInfoSchema } from "@/lib/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
 import { EditorFormProps } from "@/lib/types";
+import { Button } from "@/components/ui/button";
 export default function PersonalInfoForm({
   resumeData,
   setResumeData,
@@ -50,6 +51,8 @@ export default function PersonalInfoForm({
     };
   }, [form, resumeData, setResumeData]);
 
+  const photoInputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1.5 text-center">
@@ -64,23 +67,38 @@ export default function PersonalInfoForm({
           <FormField
             control={form.control}
             name="photo"
-            render={({ field }) => (
+            render={({ field: { value, ...fieldValues } }) => (
               <FormItem>
                 <FormLabel>Photo</FormLabel>
-                <FormControl>
-                  <Input
-                    name={field.name}
-                    ref={field.ref}
-                    onBlur={field.onBlur}
-                    disabled={field.disabled}
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      field.onChange(file);
+                <div className="flex gap-2">
+                  <FormControl>
+                    <Input
+                      {...fieldValues}
+                      name={fieldValues.name}
+                      onBlur={fieldValues.onBlur}
+                      disabled={fieldValues.disabled}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        fieldValues.onChange(file);
+                      }}
+                      ref={photoInputRef}
+                    />
+                  </FormControl>
+                  <Button
+                    variant="secondary"
+                    type="button"
+                    onClick={() => {
+                      fieldValues.onChange(null);
+                      if (photoInputRef.current) {
+                        photoInputRef.current.value = "";
+                      }
                     }}
-                  />
-                </FormControl>
+                  >
+                    Remove
+                  </Button>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
