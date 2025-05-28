@@ -71,6 +71,14 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
               width={110}
               height={110}
               className="aspect-square object-cover"
+              style={{
+                borderRadius:
+                  borderStyle === BorderStyles.SQUARE
+                    ? "0px"
+                    : borderStyle == BorderStyles.ROUNDED
+                      ? "10px"
+                      : "0px",
+              }}
             />
           )}
         </div>

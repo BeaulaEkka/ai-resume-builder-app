@@ -20,11 +20,17 @@ export default function BorderStyleButton({
   onChange,
 }: BorderStyleButtonProps) {
   function handleBorderStyleChange() {
-    const currentIndex = borderStyles.indexOf(borderStyle || "");
+    const currentIndex = borderStyle ? borderStyles.indexOf(borderStyle) : 0;
     const nextIndex = (currentIndex + 1) % borderStyles.length;
-    const nextBorderStyle = borderStyles[nextIndex];
-    onChange(nextBorderStyle);
+    onChange(borderStyles[nextIndex]);
   }
+
+  const Icon =
+    borderStyle === "square"
+      ? Square
+      : borderStyle === "circle"
+        ? Circle
+        : Squircle;
   return (
     <Button
       variant="outline"
