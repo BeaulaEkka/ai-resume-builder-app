@@ -75,7 +75,6 @@ export default function PersonalInfoForm({
                     <Input
                       {...fieldValues}
                       name={fieldValues.name}
-                      onBlur={fieldValues.onBlur}
                       disabled={fieldValues.disabled}
                       type="file"
                       accept="image/*"
