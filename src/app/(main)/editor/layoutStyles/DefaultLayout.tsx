@@ -25,6 +25,7 @@ import { ResumeValues } from "@/lib/validations";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { BorderStyles } from "../components/BorderStyleButton";
 
 interface ResumeSectionProps {
   resumeData: ResumeValues;
@@ -75,9 +76,9 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
                 borderRadius:
                   borderStyle === BorderStyles.SQUARE
                     ? "0px"
-                    : borderStyle == BorderStyles.ROUNDED
-                      ? "10px"
-                      : "0px",
+                    : borderStyle === BorderStyles.CIRCLE
+                      ? "9999px"
+                      : "10%",
               }}
             />
           )}

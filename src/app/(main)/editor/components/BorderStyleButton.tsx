@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Squircle } from "lucide-react";
+import { Circle, Square, Squircle } from "lucide-react";
 
 //define options for border radius
 export const BorderStyles = {
@@ -39,7 +39,7 @@ export default function BorderStyleButton({
       type="button"
       size="icon"
     >
-      <Squircle className="size-6" />
+      <Icon className="size-6" />
     </Button>
   );
 }
