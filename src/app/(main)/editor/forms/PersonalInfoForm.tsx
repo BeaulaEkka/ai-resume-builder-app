@@ -94,6 +94,7 @@ export default function PersonalInfoForm({
                   <Button
                     variant="secondary"
                     type="button"
+                    aria-label="Remove profile photo"
                     onClick={() => {
                       // Clear the photo field in the form
                       fieldValues.onChange(null);
