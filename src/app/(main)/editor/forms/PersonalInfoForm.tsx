@@ -29,6 +29,7 @@ export default function PersonalInfoForm({
       country: resumeData.country || "",
       email: resumeData.email || "",
       phone: resumeData.phone || "",
+      photo: resumeData.photo || null,
     },
   });
   //because we dont have a submit button in this form, we need to trigger validation manually because we need to pass the values to the resumepreview immediately
@@ -37,8 +38,13 @@ export default function PersonalInfoForm({
     const debouncedValidateAndUpdate = debounce(async (values) => {
       const isValid = await form.trigger();
       if (!isValid) return;
+
       // update the resume preview
-      setResumeData({ ...resumeData, ...values });
+      setResumeData({
+        ...resumeData,
+        ...values,
+        photo: values.photo || null,
+      });
     }, 500); // wait 500ms after the user stops typing
 
     const subscription = form.watch((values) => {
@@ -89,10 +95,17 @@ export default function PersonalInfoForm({
                     variant="secondary"
                     type="button"
                     onClick={() => {
+                      // Clear the photo field in the form
                       fieldValues.onChange(null);
+                      // Clear the file input
                       if (photoInputRef.current) {
                         photoInputRef.current.value = "";
                       }
+                      // Immediately update resumeData to remove the photo
+                      setResumeData({
+                        ...resumeData,
+                        photo: null,
+                      });
                     }}
                   >
                     Remove

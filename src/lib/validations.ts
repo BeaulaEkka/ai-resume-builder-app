@@ -14,17 +14,33 @@ export type GeneralInfoValues = z.infer<typeof generalInfoFormSchema>;
 
 //personalInfoForm
 export const personalInfoSchema = z.object({
+  // photo: z
+  //   .custom<File | undefined>() //undefined because we dont have to upload photo
+  //   .refine(
+  //     (file) =>
+  //       !file || (file instanceof File && file.type.startsWith("image/")),
+  //     "This is not an image file, please upload a valid image file."
+  //   )
+  //   .refine(
+  //     (file) => !file || file.size <= 1024 * 1024 * 4,
+  //     "File size must be less than 4MB"
+  //   ),
   photo: z
-    .custom<File | undefined>() //undefined because we dont have to upload photo
-    .refine(
-      (file) =>
-        !file || (file instanceof File && file.type.startsWith("image/")),
-      "This is not an image file, please upload a valid image file."
-    )
-    .refine(
-      (file) => !file || file.size <= 1024 * 1024 * 4,
-      "File size must be less than 4MB"
-    ),
+    .union([
+      z
+        .instanceof(File)
+        .refine(
+          (file) => file.type.startsWith("image/"),
+          "This is not an image file, please upload a valid image file."
+        )
+        .refine(
+          (file) => file.size <= 1024 * 1024 * 4,
+          "File size must be less than 4MB"
+        ),
+      z.string().url("Photo URL must be a valid URL").optional(),
+      z.null(),
+    ])
+    .optional(),
   firstName: optionalString,
   lastName: optionalString,
   jobTitle: optionalString,
