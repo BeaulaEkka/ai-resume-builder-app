@@ -219,7 +219,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
 }
 
 function SkillsSection({ resumeData }: ResumeSectionProps) {
-  const { skills, colorHex } = resumeData;
+  const { skills, colorHex, borderStyle } = resumeData;
   if (!skills) return null;
 
   //only show exp that is not empty
@@ -241,7 +241,15 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
             <p key={index} className="pt-3">
               <Badge
                 className="rounded-md bg-gray-950 px-2 py-1 text-xs font-semibold text-white hover:bg-black"
-                style={{ backgroundColor: colorHex }}
+                style={{
+                  backgroundColor: colorHex,
+                  borderRadius:
+                    borderStyle === BorderStyles.SQUARE
+                      ? "0px"
+                      : borderStyle === BorderStyles.CIRCLE
+                        ? "9999px"
+                        : "10%",
+                }}
               >
                 {skill}
               </Badge>
