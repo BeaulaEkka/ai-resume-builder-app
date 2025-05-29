@@ -248,7 +248,7 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
                       ? "0px"
                       : borderStyle === BorderStyles.CIRCLE
                         ? "9999px"
-                        : "10%",
+                        : "8px",
                 }}
               >
                 {skill}
