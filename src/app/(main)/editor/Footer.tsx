@@ -41,7 +41,13 @@ export default function Footer({
             Next Step
           </Button>
         </div>
-        <Button>{showSmResumePreview ? <PenLineIcon /> : <FileUserIcon />}</Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => setShowSmResumePreview(!setShowSmResumePreview)}
+        >
+          {showSmResumePreview ? <PenLineIcon /> : <FileUserIcon />}
+        </Button>
         <div className="flex items-center gap-3">
           <Button asChild variant="secondary">
             <Link href="/resumes">Close</Link>
