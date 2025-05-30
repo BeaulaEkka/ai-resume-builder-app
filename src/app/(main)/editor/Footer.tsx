@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "lucide-react";
+import { FileUserIcon, Link, PenLineIcon } from "lucide-react";
 import React from "react";
 import { steps } from "./steps";
 
@@ -41,6 +41,7 @@ export default function Footer({
             Next Step
           </Button>
         </div>
+        <Button>{showSmResumePreview ? <PenLineIcon /> : <FileUserIcon />}</Button>
         <div className="flex items-center gap-3">
           <Button asChild variant="secondary">
             <Link href="/resumes">Close</Link>
